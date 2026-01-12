@@ -1,0 +1,13 @@
+pandas
+numpy
+scikit-learn
+google-cloud-bigquery
+ortools
+db-dtypes
+pandas-gbq
+streamlit
+plotly
+matplotlib
+seaborn
+google-genai
+python-dotenv

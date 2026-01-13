@@ -1,166 +1,126 @@
-#  Winter Hackathon - Repository Setup Guide
-
-Welcome to the Winter Hackathon organized by **Sceptix** and **GDG SJEC**! To track your progress and collaborate effectively, every team must fork the official repository and follow the steps below.
-
----
-
-##  Fork the Repository
-
-1. Go to the GitHub page: [https://github.com/gdgsjec/WinterHackathon-TEAM_NAME-](https://github.com/gdgsjec/WinterHackathon-TEAM_NAME-)
-2. Click on the **"Fork"** button in the upper-right corner of the page
-3. Assign the repository name as `WinterHackathon-<TeamName>`
-> 📝 **Note:** Please use **[PascalCase](https://pascal-case.com/)** for your team name.
-
-
-**Example:**
-```
-Repository Name: WinterHackathon-BossBandit
-```
-
----
-
-##  Clone Your Forked Repository
-
-1. Go to your forked repository on GitHub
-2. Click the green **"Code"** button, then click the clipboard icon to copy the URL
-3. Open your terminal and run the following command to copy the repository to your local machine (replace `<repository-url>` with your forked repository URL):
-
-```bash
-git clone <repository-url>
-```
-
----
-
-##  Start Working on Your Project
-
-Begin building your solution! Collaborate with your teammates and push changes regularly.
-
----
-## Update the README (Mandatory)
-
-Before writing any code, replace the existing README.md with information specific to your project.
-Your README is the first thing mentors and judges will see, so make sure it clearly explains what you built and why.
-You can replace the README with the recommended template below and update the contents as you work on the project.
-
-### Recommended Format for README:
-Use the structure below:
-```
- # Project Name
+# 🛡️ Ghost-Shield AI
 
 ## Description
-Briefly explain what your project does, the problem it solves, and who it is for.
 
-# Demo Video Link: <insert Google Drive link to the demo video of the working of your project>
+Ghost-Shield AI is a decision-support system built to detect and mitigate **Ghost Demand** in retail and e-commerce supply chains.
+
+Ghost Demand refers to demand signals that are **real in data but false in intent**. These spikes often occur during flash sales, influencer-driven trends, or promotional campaigns. Traditional forecasting systems treat these spikes as long-term demand, causing businesses to overproduce.
+
+The result:
+- Excess inventory
+- Heavy discounting
+- Warehousing costs
+- Product waste
+- Capital lock-up
+
+Ghost-Shield AI identifies such misleading demand patterns early and converts them into **actionable production recommendations**, helping organizations reduce costs and waste while improving operational efficiency.
+
+---
+
 
 ## Features
-- Key feature 1
-- Key feature 2
-- Key feature 3
+
+- Detects abnormal demand spikes using unsupervised machine learning  
+- Identifies ghost demand at SKU–day level granularity  
+- Recommends optimal production cuts using mathematical optimization  
+- Estimates production cost savings and waste reduction  
+- Provides business-ready dashboards for decision makers  
+
+---
 
 ## Tech Stack
-List the technologies, frameworks, and tools used in the project.
+
+- Python  
+- Pandas & NumPy  
+- Scikit-learn (Isolation Forest)  
+- Google OR-Tools  
+- Google BigQuery  
+- Looker Studio  
+- Streamlit (internal exploratory UI)  
+
+---
 
 ## Google Technologies Used
-> ⚠️ Using Google products is **mandatory** for this hackathon.
 
-List the Google technologies you used and clearly explain **why** you chose them.
+### Tools Used
+- Google BigQuery
+- Looker Studio
+- Google OR-Tools
+- Antigravity IDE
+- Gemini API
 
-**Example:**
-- **Firebase Authentication** – For secure and easy user authentication
-- **Firebase Firestore** – To store and manage real-time data
-- **Google Maps API** – To enable location-based features
+### Why We Chose These Google Technologies
+
+- **Google BigQuery**  
+  Used as the central analytics warehouse to store processed demand data, ghost demand alerts, and optimization outputs.  
+  BigQuery allows fast, scalable SQL-based analysis over large datasets and serves as the backend for dashboards without requiring additional infrastructure.
+
+- **Looker Studio**  
+  Used to build interactive dashboards directly connected to BigQuery.  
+  This enables judges and stakeholders to explore ghost demand cases, SKU-level savings, and overall business impact in real time without running code.
+
+- **Google OR-Tools**  
+  Used to solve constrained optimization problems that convert ML-detected ghost demand into optimal production cut recommendations.  
+  This ensures the solution goes beyond detection and delivers actionable, cost-minimizing decisions.
+
+- **Antigravity IDE**  
+  Used to write and run the code.  
+  This ensures the solution goes beyond detection and delivers actionable, cost-minimizing decisions.
+
+- **Gemini API**  
+  To explain the final output of the code.
+  
+---
 
 ## Setup Instructions
-Steps to run the project locally:
-1. Clone the repository
-2. Install dependencies
-3. Add environment variables (if any)
-4. Run the project
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/satyarao08/WinterHackathon-PixelPirates
+cd WinterHackathon-PixelPirates
+```
+
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Set up Google Cloud Credentials
+
+- Create a service account in Google Cloud Console with access to BigQuery.
+- Download the service account key JSON file.
+- Set the environment variable `GOOGLE_APPLICATION_CREDENTIALS` to the path of the JSON file.
+
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS="path/to/your/service-account-key.json"
+```
+
+### 4. Run the Application
+
+```bash
+cd src
+python main.py
+```
+
+```bash
+cd ..
+streamlit run app.py
+```
+
+---
+
+## How it Works
+
+1. **Data Ingestion**: Sales and forecast data are pulled from BigQuery.
+2. **Feature Engineering**: The system calculates rolling means, standard deviations, and volatility ratios to capture the "rhythm" of demand.
+3. **Detection**: The `ml_model` identifies records where the forecast deviates significantly from historical patterns without corresponding sales support.
+4. **Optimization**: For every "Ghost" case, the `optimization` engine calculates the most cost-effective production reduction.
+5. **Visualization**: All metrics are aggregated into the dashboard for executive and operational review.
+
+---
 
 ## Team Members
-- Name 1
-- Name 2
-- Name 3
-```
-
-
-## Commit Your Changes
-
-Track and save your progress using Git:
-
-### Check the status of your changes
-```bash
-git status
-```
-
-### Stage your changes
-Use the `git add` command to stage the changes you want to commit:
-```bash
-git add .
-```
-
-### Commit with a meaningful message
-
-#### **Option 1: Simple Commit Format** (Beginner Friendly)
-Use this if you're new to Git:
-```bash
-git commit -m "Your descriptive commit message"
-```
-
-#### **Option 2: Conventional Commits** (Recommended)
-Follow this format for more structured, professional commit history:
-```bash
-git commit -m "<type>(<scope>): <subject>"
-```
-
-**Commit Types:**
-
-| Type | Purpose |
-|------|---------|
-| `feat` | For a new feature for the user, not a new feature for build script. Such commit will trigger a release bumping a MINOR version |
-| `fix` | For a bug fix for the user, not a fix to a build script. Such commit will trigger a release bumping a PATCH version |
-| `perf` | For performance improvements. Such commit will trigger a release bumping a PATCH version |
-| `docs` | For changes to the documentation |
-| `test` | For adding missing tests, refactoring tests; no production code change |
-| `style` | For formatting changes, missing semicolons, etc |
-| `refactor` | For refactoring production code, e.g. renaming a variable |
-| `build` | For updating build configuration, development tools or other changes irrelevant to the user |
-
-- **Scope:** Area of change (e.g., api, ui, auth)
-- **Subject:** One-line summary in present tense, no period at the end
-
-**Example:**
-```bash
-git commit -m "fix(button): fix submit button not working"
-```
-
----
-
-## Push Your Changes
-
-Send your local commits to GitHub:
-```bash
-git push origin
-```
-
----
-
-##  Tips for Success
-
-- **Commit often:** Small, frequent commits help track progress and fix bugs easily
-- **Write clear messages:** Describe what you did in each commit
-- **Collaborate:** Make sure everyone in your team contributes
-- **Stay organized:** Use branches for different features if needed
-- **Test regularly:** Ensure your code works before pushing
-
----
-
-##  Need Help?
-
-For any issues or doubts, reach out to the organizing team.
-
-**Happy Hacking!** ✨
-
----
-
-*Organized by Sceptix & GDG SJEC*  
+- Satyashree G Rao
+- Ashutosh Shenoy

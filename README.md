@@ -122,5 +122,5 @@ streamlit run app.py
 ---
 
 ## Team Members
-- Satyashree G Rao
-- Ashutosh Shenoy
+- Satyashree G Rao -Frontend(BigQuery, Looker Studio)
+- Ashutosh Shenoy -Backend(Machine Learning, Optimization)
